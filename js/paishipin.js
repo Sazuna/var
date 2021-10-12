@@ -2,7 +2,7 @@ var video = document.getElementById("video");
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-navigator.getUserMedia({video:true,audio:false},gotStream,noStream);
+navigator.getUserMedia({video:{facingMode:"environment"},audio:false},gotStream,noStream);
 
 var yuewei = document.getElementById("yuewei");
 
