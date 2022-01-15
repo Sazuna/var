@@ -6,7 +6,7 @@
 		<title>var</title>
 	</head>
 	<body>
-		<button id="m1">拍</button><button id="m2">慢放</button><button id="m3">越位</button>
+		<div id="menu"><button id="m1">拍</button><button id="m2">慢放</button><button id="m3">越位</button></div>
 		<div id="paishipin">
 			<video id="video" width="1024" height="800" autoplay></video>
 			<button id="rec">REC</button>
@@ -21,11 +21,12 @@
 		<div id="yuewei" style="display:none">
 			<div class="overlay">
 				<canvas id="canvas" width="1024" height="800" class="back"></canvas>
-				<canvas id="canvas" width="1024" height="800" class="front"></canvas>
+				<canvas id="yueweiCanvas" width="1024" height="800" class="front"></canvas>
 			</div>
 		</div>
 	</body>
 	<script type="text/javascript" src="js/paishipin.js"></script>
 	<script type="text/javascript" src="js/manfang.js"></script>
+	<script type="text/javascript" src="js/yuewei.js"></script>
 	<script type="text/javascript" src="js/menu.js"></script>
 </html>
