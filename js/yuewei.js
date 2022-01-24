@@ -121,7 +121,7 @@ function drawYueWei()
 	{
 		xA ++;
 	}
-	if (xC == yD)
+	if (xC == xD)
 	{
 		xC++;
 	}
