@@ -67,9 +67,6 @@ function drawPoints()
 		ctx.lineTo(x, y+distBetweenClicks);
 		ctx.stroke();
 		ctx.closePath();
-		/*ctx.arc(coords[i][0], coords[i][1], distBetweenClicks, 0, 2 * Math.PI);
-		ctx.fill();
-		ctx.closePath();*/
 	}
 }
 
@@ -98,8 +95,8 @@ function drawYueWei()
 	var yC = coords[1][1];
 	var xD = coords[3][0];
 	var yD = coords[3][1];
-	var xE = coords[4][0];
-	var yE = coords[4][1];
+
+	// Make points' position exchangeable horizontally
 	if (xB > xD)
 	{
 		xx = xD;
@@ -124,9 +121,9 @@ function drawYueWei()
 	{
 		xA ++;
 	}
-	if (yA == yC)
+	if (xC == yD)
 	{
-		yA++;
+		xC++;
 	}
 	//(yP - yA) / (yB - yA) = (xP - xA) / (xB - xA);
 	//(yP - yC) / (yD - yC) = (xP - xC) / (xD - xC);
@@ -140,67 +137,37 @@ function drawYueWei()
 	// xP (l1a-l2a) = l2b - l1b;
 	xP = (l2b - l1b) / (l1a - l2a);
 	yP = l1a * xP + l1b;
-	// console.log ("xP = " + xP + " yP = " + yP + " yP2 = " + (l2a * xP + l2b));
-	// draw the line from P to Ball
-	l3a = (yP - yE) / (xP - xE);
-	l3b = - l3a * xP + yP;
+	
+	// draw the line from P to Object (ball or player)
 	ctx.fillStyle = '#aaa';
-	if (l3a <= 1 && l3a >= -1)
+	ctx.beginPath();
+	for (i = countClicks - 1 ; i >= 4; i--)
 	{
-		for (x = 0; x < yueweiCanvas.width; x++)
-		{
-			y = l3a * x + l3b;
-			ctx.beginPath();
-			ctx.moveTo(x, y);
-			ctx.fillRect(x, y, 1, 1);
-			ctx.fill();
-			ctx.closePath();
-		}
-	}
-	else
-	{
-		for (y = 0; y < yueweiCanvas.height; y++)
-		{
-			x = (y - l3b) / l3a;
-			ctx.beginPath();
-			ctx.moveTo(x, y);
-			ctx.fillRect(x, y, 1, 1);
-			ctx.fill();
-			ctx.closePath();
-		}
-	}
-	if (countClicks == 6)
-	{
-		xF = coords[5][0];
-		yF = coords[5][1];
-		l4a = (yP - yF) / (xP - xF);
-		l4b = - l4a * xP + yP;
-		ctx.fillStyle = '#333';
-		if (l4a <= 1 && l4a >= -1)
+		var xO = coords[i][0];
+		var yO = coords[i][1];
+		a = (yP - yO) / (xP - xO);
+		b = -a * xP + yP;
+		if (a <= 1 && a >= -1)
 		{
 			for (x = 0; x < yueweiCanvas.width; x++)
 			{
-				y = l4a * x + l4b;
-				ctx.beginPath();
+				y = a * x + b;
 				ctx.moveTo(x, y);
 				ctx.fillRect(x, y, 1, 1);
-				ctx.fill();
-				ctx.closePath();
 			}
 		}
 		else
 		{
 			for (y = 0; y < yueweiCanvas.height; y++)
 			{
-				x = (y - l4b) / l4a;
-				ctx.beginPath();
+				x = (y - b) / a;
 				ctx.moveTo(x, y);
 				ctx.fillRect(x, y, 1, 1);
-				ctx.fill();
-				ctx.closePath();
 			}
 		}
 	}
+	ctx.fill();
+	ctx.closePath();
 }
 
 function drawLines()
@@ -247,7 +214,6 @@ function redraw()
 {
 	clear();
 	//drawArea();
-	
 	if (!document.getElementById('hide').checked)
 	{
 		drawPoints();
