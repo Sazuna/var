@@ -13,6 +13,12 @@ var chunks = [];
 var is_rec=false;
 var rec = document.getElementById("rec");
 
+// TIMER
+var sec = 0;
+var min = 0;
+var hours = 0;
+var timer = document.getElementById("timer");
+
 function gotStream(stream)
 {
 	//video.src=URL.createObjectURL(stream);
@@ -51,13 +57,15 @@ function gotStream(stream)
 			media_rec.start();
 			console.log(media_rec.state);
 			console.log("demarage enregistrement");
-			document.getElementById('rec').style.color = "red";
+			//document.getElementById('rec').style.color = "red";
+			document.getElementById('innerRec').innerHTML="STOP";
+			
 		}
 		else{
 			media_rec.stop();
 			console.log(media_rec.state);
-			document.getElementById('rec').style.color = "black";
-			
+			//document.getElementById('rec').style.color = "white";
+			document.getElementById('innerRec').innerHTML="REC";
 			document.getElementById("paishipin").style.display="none";
 			document.getElementById("manfang").style.display="block";
 			

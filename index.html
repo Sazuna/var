@@ -3,6 +3,13 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/style.css">
+		<style>
+		body {
+			background-color: #333;
+			color:white;
+			text-align:center;
+		}
+		</style>
 		<title>var</title>
 	</head>
 	<body>
@@ -16,25 +23,26 @@
 		<div id="paishipin" class="center">
 			<video id="video" width="1024" height="800" autoplay></video>
 			<div class="bottom">
-				<button id="rec">REC</button>
+				<span><div id="rec"><div id="innerRec">REC</div></div></span>
+				<span><time id="timer">00:00:00</time></span>
 			</div>
 		</div>
 		<div id="manfang" class="center" style="display:none">
 			<video id="resultat"  width=1024 height=800 controls></video>
 			<div class="bottom">
-				慢放
-				<input id="speedcontrol" type="range" min = "0.1" max = "1.0" step="0.1" value="1.0" oninput="this.nextElementSibling.value = this.value; manfang()">
-				<output>1</output>
-				<button id="snap">SNAP</button>
+				<span>慢放</span>
+				<span><input id="speedcontrol" width=1024 type="range" min = "0.1" max = "1.0" step="0.1" value="1.0" oninput="document.getElementById('speedControlOutput').value = this.value; manfang();"></span>
+				<span><output id="speedControlOutput">1.0</output></span>
+				<span><div id="snap">下一步</div></span>
 			</div>
 		</div>
 		<div id="yuewei" class="center" style="display:none">
-			<div class="overlay center">
+			<div class="overlay" class="center">
 				<canvas id="canvas" width="1024" height="800" class="back"></canvas>
 				<canvas id="yueweiCanvas" width="1024" height="800" class="front"></canvas>
-				<div class="bottom">
-					<input type="checkbox" id="hide" onclick="redraw()">HIDE</input>
-				</div>
+			</div>
+			<div class="bottom">
+				<input type="checkbox" id="hide" onclick="redraw()">HIDE</input>
 			</div>
 		</div>
 	</body>
