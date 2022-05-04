@@ -14,10 +14,46 @@ var is_rec=false;
 var rec = document.getElementById("rec");
 
 // TIMER
-var sec = 0;
-var min = 0;
-var hours = 0;
+var initialTime;
+var stop;
+var isRunning = false;
 var timer = document.getElementById("timer");
+
+function initTime()
+{
+	isRunning = true;
+	var date = new Date();
+	initialTime = date.getTime();
+	countTime();
+}
+
+function countTime()
+{
+	if (isRunning)
+	{
+		var date = new Date();
+		var time = date.getTime();
+		var hours = 0;
+		var min = 0;
+		var sec = parseInt((time - initialTime) / 1000);
+		min = parseInt(sec / 60);
+		hours = parseInt(min / 60);
+		sec = sec % 60;
+		timer.innerHTML = checkTime(hours) + ":" + checkTime(min) + ":" + checkTime(sec);
+		setTimeout(countTime, 100);
+	}
+}
+
+function checkTime(i) {
+	if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+	return i;
+}
+
+function stopTime()
+{
+	isRunning = false;
+}
+
 
 function gotStream(stream)
 {
@@ -59,7 +95,7 @@ function gotStream(stream)
 			console.log("demarage enregistrement");
 			//document.getElementById('rec').style.color = "red";
 			document.getElementById('innerRec').innerHTML="STOP";
-			
+			initTime();
 		}
 		else{
 			media_rec.stop();
@@ -68,7 +104,7 @@ function gotStream(stream)
 			document.getElementById('innerRec').innerHTML="REC";
 			document.getElementById("paishipin").style.display="none";
 			document.getElementById("manfang").style.display="block";
-			
+			stopTime();
 		}
 		
 		is_rec=!is_rec;
