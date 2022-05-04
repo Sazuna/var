@@ -1,13 +1,13 @@
 .overlay
 {
 	position:relative;
+	left:calc(50% - 512px);
 	width: 1024px;
 	height: 800px;
 }
 
 .back
 {
-
 	z-index:1;
 }
 
@@ -19,5 +19,56 @@
 	top:0;
 	left:0;
 	opacity:0.7;
-	bacground:red;
+}
+
+// 风格
+body
+{
+	text-align:center;
+}
+
+.center
+{
+	text-align:center;
+}
+
+#menu
+{
+	text-align:center;
+}
+
+.video-frame
+{
+	text-align:center;
+}
+
+
+
+.bottom
+{
+	bottom:0px;
+	text-align:center;
+}
+#rec
+{
+	width:10%;
+	height:30px;
+	//right : 45%;
+	//border-radius: 50%;
+}
+
+ul
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	background-color: #333;
+	//overflow: hidden;
+}
+
+li
+{
+    display: inline-block;
+	color: white;
+    padding: 14px 16px;
 }

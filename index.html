@@ -6,23 +6,35 @@
 		<title>var</title>
 	</head>
 	<body>
-		<div id="menu"><button id="m1">拍</button><button id="m2">慢放</button><button id="m3">越位</button></div>
-		<div id="paishipin">
+		<div id="menu">
+			<ul>
+				<li id="m1">1 拍视频</li>
+				<li id="m2">2 重播</li>
+				<li id="m3">3 划越位</li>
+			</ul>
+		</div>
+		<div id="paishipin" class="center">
 			<video id="video" width="1024" height="800" autoplay></video>
-			<button id="rec">REC</button>
+			<div class="bottom">
+				<button id="rec">REC</button>
+			</div>
 		</div>
-		<div id="manfang" style="display:none">
+		<div id="manfang" class="center" style="display:none">
 			<video id="resultat"  width=1024 height=800 controls></video>
-			慢放
-			<input id="speedcontrol" type="range" min = "0.1" max = "1.0" step="0.1" value="1.0" oninput="this.nextElementSibling.value = this.value; manfang()">
-			<output>1</output>
-			<button id="snap">SNAP</button>
+			<div class="bottom">
+				慢放
+				<input id="speedcontrol" type="range" min = "0.1" max = "1.0" step="0.1" value="1.0" oninput="this.nextElementSibling.value = this.value; manfang()">
+				<output>1</output>
+				<button id="snap">SNAP</button>
+			</div>
 		</div>
-		<div id="yuewei" style="display:none">
-			<div class="overlay">
+		<div id="yuewei" class="center" style="display:none">
+			<div class="overlay center">
 				<canvas id="canvas" width="1024" height="800" class="back"></canvas>
 				<canvas id="yueweiCanvas" width="1024" height="800" class="front"></canvas>
-				<input type="checkbox" id="hide" onclick="redraw()">HIDE</input>
+				<div class="bottom">
+					<input type="checkbox" id="hide" onclick="redraw()">HIDE</input>
+				</div>
 			</div>
 		</div>
 	</body>
