@@ -39,6 +39,7 @@ function countTime()
 		min = parseInt(sec / 60);
 		hours = parseInt(min / 60);
 		sec = sec % 60;
+		min = min % 60;
 		timer.innerHTML = checkTime(hours) + ":" + checkTime(min) + ":" + checkTime(sec);
 		setTimeout(countTime, 100);
 	}
