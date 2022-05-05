@@ -134,7 +134,7 @@ function drawYueWei()
 	yP = l1a * xP + l1b;
 	
 	// draw the line from P (Perspective point) to Object (player)
-	ctx.fillStyle = '#aaa';
+	ctx.fillStyle = '#f00';
 	ctx.beginPath();
 	for (i = countClicks - 1 ; i >= 4; i--)
 	{
