@@ -19,7 +19,11 @@ for (var i = 0; i < coords.length; i++) {
   coords[i] = new Array(2);
 }
 
-// Functions
+///////////////
+// Functions //
+///////////////
+
+// Checks if an existing point is clicked. If not, adds a new point
 function clickPoint(e)
 {
 	x = getX(e);
@@ -36,6 +40,7 @@ function clickPoint(e)
 	}
 }
 
+// If an existing point is clicked, change its coords following the mouse
 function movePoint(e)
 {
 	if (dragging >= 0 && dragging <= countClicks)
@@ -46,11 +51,13 @@ function movePoint(e)
 	}
 }
 
+// When the mouse is released after a drag
 function releasePoint(e)
 {
 	dragging = -1;
 }
 
+// Draws the 十
 function drawPoints()
 {
 	ctx.fillStyle = '#00f';
@@ -68,19 +75,6 @@ function drawPoints()
 		ctx.stroke();
 		ctx.closePath();
 	}
-}
-
-function drawArea()
-{
-	ctx.fillStyle = '#f00';
-	ctx.beginPath();
-	ctx.moveTo(coords[0][0], coords[0][1]);
-	for (i = 0; i < countClicks && i < 4; i++)
-	{
-			ctx.lineTo(coords[i][0],coords[i][1]);
-	}
-	ctx.closePath();
-	ctx.fill();
 }
 
 function drawYueWei()
@@ -125,6 +119,7 @@ function drawYueWei()
 	{
 		xC++;
 	}
+	// 公式
 	//(yP - yA) / (yB - yA) = (xP - xA) / (xB - xA);
 	//(yP - yC) / (yD - yC) = (xP - xC) / (xD - xC);
 	// y = ax+b
@@ -138,7 +133,7 @@ function drawYueWei()
 	xP = (l2b - l1b) / (l1a - l2a);
 	yP = l1a * xP + l1b;
 	
-	// draw the line from P to Object (ball or player)
+	// draw the line from P (Perspective point) to Object (player)
 	ctx.fillStyle = '#aaa';
 	ctx.beginPath();
 	for (i = countClicks - 1 ; i >= 4; i--)
@@ -170,6 +165,7 @@ function drawYueWei()
 	ctx.closePath();
 }
 
+// Draw the four lines (two for the football field, two for the players')
 function drawLines()
 {
 	ctx.lineWidth = 2;
@@ -190,6 +186,8 @@ function drawLines()
 	}
 }
 
+// Returns the point that is the closest to the click.
+// If none is close enough, returns -1.
 function nearExisting(x, y)
 {
 	for (i = 0; i < countClicks; i++)
@@ -205,20 +203,23 @@ function nearExisting(x, y)
 	return -1;
 }
 
+// Clears every lines or points on the canvas
 function clear()
 {
 	ctx.clearRect(0, 0, yueweiCanvas.width, yueweiCanvas.height);
 }
 
+// Draws lines, points and 越位 lines
 function redraw()
 {
 	clear();
-	//drawArea();
+	// If hide 隐藏 box is not checked
 	if (!document.getElementById('hide').checked)
 	{
 		drawPoints();
 		drawLines();
 	}
+	// If there are more than 4 points, draw 越位 lines
 	if (countClicks >= 5)
 	{
 		drawYueWei();

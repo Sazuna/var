@@ -1,3 +1,7 @@
+/*
+点击主要菜单时，使整页换一个步骤
+*/
+
 document.getElementById("m1").addEventListener("click", function() {
 	document.getElementById("paishipin").style = "display:block";
 	document.getElementById("manfang").style = "display:none";
