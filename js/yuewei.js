@@ -190,17 +190,20 @@ function drawLines()
 // If none is close enough, returns -1.
 function nearExisting(x, y)
 {
+	var closestDist = 1000;
+	var point = -1;
 	for (i = 0; i < countClicks; i++)
 	{
 		x2 = coords[i][0];
 		y2 = coords[i][1];
 		dist = (x - x2) * (x - x2) + (y - y2) * (y - y2);
-		if (dist < distBetweenClicks*distBetweenClicks)
+		if (dist < distBetweenClicks*distBetweenClicks & dist < closestDist)
 		{
-			return i;
+			closestDist = dist;
+			point = i;
 		}
 	}
-	return -1;
+	return point;
 }
 
 // Clears every lines or points on the canvas
