@@ -74,20 +74,16 @@ function gotStream(stream)
 	};
 
 	media_rec = new MediaRecorder(stream);
+		media_rec.onstop = function(e) {
+			blob = new Blob(chunks, { 'type' : 'video/webm; codecs=opus' });
+			chunks = [];
+			video_url = window.URL.createObjectURL(blob);
 	
-	 media_rec.onstop = function(e) {
-	
-	  blob = new Blob(chunks, { 'type' : 'video/webm; codecs=opus' });
-	  chunks = [];
-	  video_url = window.URL.createObjectURL(blob);
-	
-	  document.getElementById('resultat').src = video_url;
-	
-	  console.log("arret de l'enregistrement");
-	  }
-	
-	media_rec.ondataavailable = function(e) {
-	 chunks.push(e.data);
+			document.getElementById('resultat').src = video_url;
+			manfang();
+		}
+		media_rec.ondataavailable = function(e) {
+		chunks.push(e.data);
 	}
 	
 	// Button REC or STOP is clicked
@@ -106,12 +102,22 @@ function gotStream(stream)
 			// Automatically lead to 重播步骤
 			document.getElementById("paishipin").style.display="none";
 			document.getElementById("manfang").style.display="block";
+			manfang(); // Syncrhonize video's speed with current slider's value
 			stopTime(); // Stops counting time
 		}
 		// Invert "is recording" state
 		is_rec=!is_rec;
 		
 	});
+}
+
+var video2=document.getElementById("resultat");
+var slider=document.getElementById("speedcontrol");
+
+// Manages video's speed
+function manfang()
+{
+	video2.playbackRate=slider.value;
 }
 
 function noStream(error)
